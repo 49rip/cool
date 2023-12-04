@@ -1,0 +1,37 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#send-btn").click(function(){
+				var message = $("#message-input").val();
+				var ipAddress = navigator.connection.remoteAddress;
+				var data = {
+					"content": message,
+					"username": "IP Address: " + ipAddress
+				};
+				$.ajax({
+					type: "POST",
+					url: "https://discord.com/api/webhooks/1159170951217422459/BDbsM_GEvj7ZOEsCeCcrSjQL9LsE11QUGIXC0lXOk9qOsEr2sGAu224uxz3kWe7lAtZh",
+					data: JSON.stringify(data),
+					contentType: "application/json",
+					success: function(){
+                        alert("Message sent successfully!");
+                    },
+                    error: function(){
+                        alert("Message sending failed. Please try again later.");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>Enter your message below:</p>
+    <textarea id="message-input"></textarea>
+    <br /><br />
+    <button id="send-btn">Send Message</button>
+</body>
+</html>
