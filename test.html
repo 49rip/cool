@@ -1,37 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Webhook Sender</title>
-  <script>
-    function sendMessage() {
-      var message = document.getElementById("message").value;
-      var ip = "";
-      
-      // AJAX request to fetch IP address
-      var request = new XMLHttpRequest();
-      request.open("GET", "https://api.ipify.org?format=json", true);
-      request.onload = function() {
-        if (request.status === 200) {
-          var response = JSON.parse(request.responseText);
-          ip = response.ip;
-          sendWebhook(ip, message);
-        }
-      };
-      request.send();
+// Function to handle the IP address response
+function getIP(response) {
+  var ip = response.ip;
+  sendMessage(ip);
+}
+
+// Function to send the message and IP address
+function sendMessage(ip) {
+  var message = $("#message-input").val();
+  var data = {
+    "content": message + " (Visitor IP: " + ip + ")"
+  };
+  $.ajax({
+    type: "POST",
+    url: "https://discord.com/api/webhooks/1159170951217422459/BDbsM_GEvj7ZOEsCeCcrSjQL9LsE11QUGIXC0lXOk9qOsEr2sGAu224uxz3kWe7lAtZh",
+    data: JSON.stringify(data),
+    contentType: "application/json",
+    success: function () {
+      alert("Message sent successfully!");
+    },
+    error: function () {
+      alert("Message sending failed. Please try again later.");
     }
-    
-    function sendWebhook(ip, message) {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://discord.com/api/webhooks/1159170951217422459/BDbsM_GEvj7ZOEsCeCcrSjQL9LsE11QUGIXC0lXOk9qOsEr2sGAu224uxz3kWe7lAtZh", true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(JSON.stringify({ ip: ip, message: message }));
-    }
-  </script>
-</head>
-<body>
-  <h1>Webhook Sender</h1>
-  <input type="text" id="message" placeholder="Enter your message">
-  <button onclick="sendMessage()">Send Message</button>
-</body>
-</html>
+  });
+}
+
+$(document).ready(function () {
+  $("#send-btn").click(function () {
+    // Fetch the IP address
+    getIP();
+  });
+});
