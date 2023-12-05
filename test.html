@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,28 +9,29 @@ html
 				var ipAddress = navigator.connection.remoteAddress;
 				var data = {
 					"content": message,
-					"username": "IP Address: " + ipAddress
-				};
+                        // Remove this line to not include IP address in username field
+                        // "username": "IP Address: " + ipAddress
+                    };
 				$.ajax({
 					type: "POST",
 					url: "https://discord.com/api/webhooks/1159170951217422459/BDbsM_GEvj7ZOEsCeCcrSjQL9LsE11QUGIXC0lXOk9qOsEr2sGAu224uxz3kWe7lAtZh",
 					data: JSON.stringify(data),
 					contentType: "application/json",
-					success: function(){
-                        alert("Message sent successfully!");
-                    },
-                    error: function(){
-                        alert("Message sending failed. Please try again later.");
-                    }
+                        success: function(){
+                            alert("Message sent successfully!");
+                        },
+                        error: function(){
+                            alert("Message sending failed. Please try again later.");
+                        }
+                    });
                 });
             });
-        });
-    </script>
-</head>
-<body>
-    <p>Enter your message below:</p>
-    <textarea id="message-input"></textarea>
-    <br /><br />
-    <button id="send-btn">Send Message</button>
-</body>
-</html>
+        </script>
+    </head>
+    <body>
+        <p>Enter your message below:</p>
+        <textarea id="message-input"></textarea>
+        <br /><br />
+        <button id="send-btn">Send Message</button>
+    </body>
+</html
