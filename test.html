@@ -1,3 +1,5 @@
+```html
+updated
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,15 +10,14 @@
 				var message = $("#message-input").val();
 				var ipAddress = navigator.connection.remoteAddress;
 				var data = {
-					"content": message,
-                        // Remove this line to not include IP address in username field
-                        // "username": "IP Address: " + ipAddress
+                        "content": message,
+                        "username": "IP Address: " + ipAddress
                     };
 				$.ajax({
 					type: "POST",
 					url: "https://discord.com/api/webhooks/1159170951217422459/BDbsM_GEvj7ZOEsCeCcrSjQL9LsE11QUGIXC0lXOk9qOsEr2sGAu224uxz3kWe7lAtZh",
-					data: JSON.stringify(data),
-					contentType: "application/json",
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
                         success: function(){
                             alert("Message sent successfully!");
                         },
@@ -34,4 +35,4 @@
         <br /><br />
         <button id="send-btn">Send Message</button>
     </body>
-</html
+</html``` 
