@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 
 const timestamp = Date.now();
 
