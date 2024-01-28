@@ -1,3 +1,4 @@
+
 const timestamp = Date.now();
 
 
@@ -28,5 +29,3 @@ fetch("https://api.ipify.org")
           .then(() => console.log("Success! (fallback)")) 
       }); 
   }); 
-</body>
-</html>
